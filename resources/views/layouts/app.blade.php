@@ -17,15 +17,13 @@
 </head>
 <body class="bg-gray-def h-screen antialiased leading-none">
     <div id="app">
-        <nav class="bg-gray-200 shadow mb-4 py-6">
-            <div class="container mx-auto px-6 md:px-0">
-                <div class="flex items-center justify-between">
-                    <div class="mr-6">
-                        <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-500 no-underline">
-                            {{ config('app.name', 'Laravel') }}
-                        </a>
-                    </div>
-                    <div class="flex-1 text-right">
+        <nav class="bg-gray-200 shadow-lg mb-4 py-2">
+            <div class="mx-auto px-6 md:px-0">
+                <div class="flex items-center justify-between ml-4">
+                    <a href="{{ route('home') }}">
+                        <img src="{{ asset('images/birdboard.png') }}" width="320px">
+                    </a>
+                    <div class="flex-1 text-right mr-4">
                         @guest
                             <a class="no-underline hover:underline text-gray-300 text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
                             @if (Route::has('register'))

@@ -3,3 +3,12 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.button {
+    @apply bg-blue-custom text-white no-underline rounded-lg py-2 px-4 text-sm;
+    box-shadow: 0 2px 7px 0 #b0eaff;
+}
+
+.card {
+    @apply bg-white mb-4 p-5 rounded-lg shadow-custom;
+}

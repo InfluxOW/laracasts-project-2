@@ -12,4 +12,14 @@ class Project extends Model
     {
         return $this->belongsTo('App\User', 'owner_id');
     }
+
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
+    }
+
+    public function addTask($task)
+    {
+        return $this->tasks()->save($task);
+    }
 }
