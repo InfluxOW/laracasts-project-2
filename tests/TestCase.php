@@ -18,7 +18,7 @@ abstract class TestCase extends BaseTestCase
         return factory('App\Project')->create();
     }
 
-    protected function logIn()
+    protected function signIn()
     {
         return $this->be($this->user());
     }

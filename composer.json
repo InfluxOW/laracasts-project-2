@@ -53,6 +53,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

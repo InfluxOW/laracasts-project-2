@@ -23,9 +23,45 @@ class ProjectTasksTest extends TestCase
     }
 
     /** @test */
+    public function a_task_can_be_updated()
+    {
+        $project = $this->project();
+        $task = $project->addTask(['body' => 'test task']);
+
+        $data = ['body' => 'updated test task', 'completed' => true];
+        $this->actingAs($project->owner)->patch(route('projects.tasks.update', compact('project', 'task')), $data);
+        $this->assertDatabaseHas('tasks', $data);
+    }
+
+    /** @test */
+    public function only_the_owner_of_a_project_may_add_tasks()
+    {
+        $this->signIn();
+        $project = $this->project();
+        $data = ['body' => 'Lorem ipsum'];
+
+        $this->actingAs(auth()->user())->post(route('projects.tasks.store', $project), $data)
+            ->assertForbidden();
+        $this->assertDatabaseMissing('tasks', $data);
+    }
+
+    /** @test */
+    public function only_the_owner_of_a_project_may_update_a_task()
+    {
+        $this->signIn();
+        $project = $this->project();
+        $task = $project->addTask(['body' => 'Lorem ipsum']);
+        $data = ['body' => 'test body for the task', 'completed' => true];
+
+        $this->actingAs(auth()->user())->patch(route('projects.tasks.update', compact('project', 'task')), $data)
+            ->assertForbidden();
+        $this->assertDatabaseMissing('tasks', $data);
+    }
+
+    /** @test */
     public function a_task_requires_a_body()
     {
-        $this->logIn();
+        $this->signIn();
 
         $project = $this->project();
         $attributes = factory('App\Task')->raw(['body' => '']);

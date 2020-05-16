@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Project;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -27,26 +28,53 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_user_can_create_a_project()
     {
-        $this->logIn();
+        $this->signIn();
 
         $attributes = [
-            'title' => $this->faker->sentence(),
-            'description' => $this->faker->paragraph()
+            'title' => $this->faker->sentence(4),
+            'description' => $this->faker->paragraph(1),
+            'notes' => $this->faker->sentence(4)
         ];
 
         $this->get(route('projects.create'))->assertOk();
 
-        $this->post(route('projects.store'), $attributes)
-            ->assertRedirect(route('projects.index'));
+        $response = $this->post(route('projects.store'), $attributes);
+        $project = Project::where($attributes)->first();
+        $response->assertRedirect(route('projects.show', $project));
+
         $this->assertDatabaseHas('projects', $attributes);
 
-        $this->get(route('projects.index'))->assertSee($attributes['title']);
+        $this->get(route('projects.show', $project))
+            ->assertSee($attributes['title'])
+            ->assertSee($attributes['description'])
+            ->assertSee($attributes['notes']);
+    }
+
+    /** @test */
+    public function a_user_can_update_a_project()
+    {
+        $project = $this->project();
+
+        $attributes = [
+            'title' => $this->faker->sentence(4),
+            'description' => $this->faker->paragraph(1),
+            'notes' => $this->faker->sentence(4)
+        ];
+
+        $response = $this->actingAs($project->owner)->patch(route('projects.update', $project), $attributes);
+        $response->assertRedirect(route('projects.show', $project));
+        $this->assertDatabaseHas('projects', $attributes);
+
+        $this->get(route('projects.show', $project))
+            ->assertSee($attributes['title'])
+            ->assertSee($attributes['description'])
+            ->assertSee($attributes['notes']);
     }
 
     /** @test */
     public function a_project_requires_a_title()
     {
-        $this->logIn();
+        $this->signIn();
 
         $attributes = factory('App\Project')->raw(['title' => '']);
 
@@ -56,7 +84,7 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_project_requires_a_description()
     {
-        $this->logIn();
+        $this->signIn();
 
         $attributes = factory('App\Project')->raw(['description' => '']);
 
@@ -76,10 +104,20 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function an_authenticated_user_cannot_view_the_projects_of_others()
     {
-        $this->logIn();
+        $this->signIn();
 
         $project = $this->project();
 
         $this->get(route('projects.show', $project))->assertForbidden();
+    }
+
+    /** @test */
+    public function an_authenticated_user_cannot_update_the_projects_of_others()
+    {
+        $this->signIn();
+
+        $project = $this->project();
+
+        $this->patch(route('projects.update', $project), ['notes' => 'test notes'])->assertForbidden();
     }
 }

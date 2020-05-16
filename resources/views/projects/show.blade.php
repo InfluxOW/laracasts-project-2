@@ -13,18 +13,38 @@
     <main>
         <div class="lg:flex -mx-3">
             <div class="lg:w-3/4 px-3">
-                <div class="mb-4">
+                <div class="mb-6">
                     <div class="text-lg text-gray-400 no-underline font-normal mb-2">Tasks</div>
-                    @forelse ($project->tasks as $task)
-                        <div class="card">{{ $task->body }}</div>
-                    @empty
-                        <div class="card">No tasks!</div>
-                    @endforelse
+
+                    @foreach ($project->tasks as $task)
+                        <div class="card">
+                            {!! Form::open(['url' => route('projects.tasks.update', compact('task', 'project')), 'method' => 'PATCH']) !!}
+                                <div class="flex">
+                                    <div class="w-full">
+                                        {!! Form::text('body', $task->body,
+                                        ['placeholder' => 'Update a task...', 'class' => $task->completed ? 'text-gray-400' : '']) !!}
+                                    </div>
+                                    {!! Form::checkbox('completed', true, $task->completed ?? false, ['onChange' => "this.form.submit()"]) !!}
+                                </div>
+                            {!! Form::close() !!}
+                        </div>
+                    @endforeach
+
+                    <div class="card">
+                        {!! Form::open(['url' => route('projects.tasks.store', $project)]) !!}
+                            {!! Form::text('body', '', ['placeholder' => 'Add a new task...', 'class' => 'w-full']) !!}
+                        {!! Form::close() !!}
+                    </div>
                 </div>
 
                 <div>
                     <div class="text-lg text-gray-400 no-underline font-normal mb-2">General Notes</div>
-                    <textarea class="card w-full">Something</textarea>
+                    <div class="w-full border border-blue-200 rounded-lg p-4">
+                        {!! Form::open(['url' => route('projects.update', $project), 'method' => 'PATCH']) !!}
+                            {!! Form::textarea('notes', $project->notes, ['placeholder' => 'Add any notes here...', 'class' => 'w-full']) !!}
+                            {!! Form::submit('Save', ['class' => 'button']) !!}
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
             <div class="lg:w-1/4 px-3">

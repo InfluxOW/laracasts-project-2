@@ -45,9 +45,9 @@ class ProjectsController extends Controller
      */
     public function store(ProjectValidation $request)
     {
-        $request->user()->projects()->create($request->validated());
+        $project = $request->user()->projects()->create($request->all());
 
-        return redirect(route('projects.index'));
+        return redirect(route('projects.show', $project));
     }
 
     /**
@@ -79,9 +79,11 @@ class ProjectsController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(ProjectValidation $request, Project $project)
     {
-        //
+        $project->update($request->all());
+
+        return redirect(route('projects.show', $project));
     }
 
     /**

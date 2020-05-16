@@ -37,8 +37,10 @@ class ProjectTasksController extends Controller
      */
     public function store(ProjectTaskValidation $request, Project $project)
     {
-        $task = Task::make($request->only(['body']));
-        $project->addTask($task);
+        $this->authorize('update', $project);
+
+        $data = $request->only(['body']);
+        $task = $project->addTask($data);
 
         return redirect()->route('projects.show', $project);
     }
@@ -72,9 +74,18 @@ class ProjectTasksController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(ProjectTaskValidation $request, Project $project, Task $task)
     {
-        //
+        $this->authorize($task->project);
+
+        $data = [
+            'body' => $request->body,
+            'completed' => $request->has('completed'),
+        ];
+
+        $task->update($data);
+
+        return redirect()->route('projects.show', $project);
     }
 
     /**

@@ -24,7 +24,8 @@ class ProjectTaskValidation extends FormRequest
     public function rules()
     {
         return [
-            'body' => ['required', 'max:300', 'min:10'],
+            'body' => ['required', 'string', 'max:300', 'min:6'],
+            'completed' => ['boolean'],
         ];
     }
 }
