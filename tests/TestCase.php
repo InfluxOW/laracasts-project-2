@@ -13,11 +13,6 @@ abstract class TestCase extends BaseTestCase
         return factory('App\User')->create();
     }
 
-    protected function project()
-    {
-        return factory('App\Project')->create();
-    }
-
     protected function signIn()
     {
         return $this->be($this->user());

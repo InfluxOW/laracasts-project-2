@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Project;
 use App\User;
+use Facades\Tests\Setup\ProjectFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\App;
@@ -17,7 +18,7 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function guests_cannot_manage_projects()
     {
-        $project = $this->project();
+        $project = ProjectFactory::create();
 
         $this->get(route('projects.index'))->assertRedirect('login');
         $this->get(route('projects.show', $project))->assertRedirect('login');
@@ -42,8 +43,6 @@ class ManageProjectsTest extends TestCase
         $project = Project::where($attributes)->first();
         $response->assertRedirect(route('projects.show', $project));
 
-        $this->assertDatabaseHas('projects', $attributes);
-
         $this->get(route('projects.show', $project))
             ->assertSee($attributes['title'])
             ->assertSee($attributes['description'])
@@ -53,7 +52,7 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_user_can_update_a_project()
     {
-        $project = $this->project();
+        $project = ProjectFactory::create();
 
         $attributes = [
             'title' => $this->faker->sentence(4),
@@ -61,8 +60,8 @@ class ManageProjectsTest extends TestCase
             'notes' => $this->faker->sentence(4)
         ];
 
-        $response = $this->actingAs($project->owner)->patch(route('projects.update', $project), $attributes);
-        $response->assertRedirect(route('projects.show', $project));
+        $this->actingAs($project->owner)->patch(route('projects.update', $project), $attributes)
+            ->assertRedirect(route('projects.show', $project));
         $this->assertDatabaseHas('projects', $attributes);
 
         $this->get(route('projects.show', $project))
@@ -94,7 +93,7 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_user_can_view_his_projects()
     {
-        $project = $this->project();
+        $project = ProjectFactory::create();
 
         $this->actingAs($project->owner)->get(route('projects.show', $project))
             ->assertSee($project['title'])
@@ -106,7 +105,7 @@ class ManageProjectsTest extends TestCase
     {
         $this->signIn();
 
-        $project = $this->project();
+        $project = ProjectFactory::create();
 
         $this->get(route('projects.show', $project))->assertForbidden();
     }
@@ -116,7 +115,7 @@ class ManageProjectsTest extends TestCase
     {
         $this->signIn();
 
-        $project = $this->project();
+        $project = ProjectFactory::create();
 
         $this->patch(route('projects.update', $project), ['notes' => 'test notes'])->assertForbidden();
     }
