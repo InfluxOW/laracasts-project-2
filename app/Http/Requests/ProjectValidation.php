@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProjectValidation extends FormRequest
 {
@@ -23,22 +24,10 @@ class ProjectValidation extends FormRequest
      */
     public function rules()
     {
-        switch ($this->method()) {
-            case 'GET':
-            case 'DELETE':
-                return [];
-            case 'POST':
-                return [
-                    'title' => ['required', 'max:255', 'min:3', 'string'],
-                    'description' => ['required', 'max:1000', 'min:10', 'string']
-                ];
-            case 'PUT':
-            case 'PATCH':
-                return [
-                    'notes' => ['nullable', 'max:5000', 'string']
-                ];
-            default:
-                break;
-        }
+        return [
+            'title' => [Rule::requiredIf($this->title), 'max:255', 'min:3', 'string'],
+            'description' => [Rule::requiredIf($this->description), 'max:1000', 'min:10', 'string'],
+            'notes' => ['nullable', 'max:5000', 'string']
+        ];
     }
 }

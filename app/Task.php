@@ -13,4 +13,10 @@ class Task extends Model
     {
         return $this->belongsTo('App\Project');
     }
+
+    public function complete()
+    {
+        $this->update(['completed' => true]);
+        $this->project->recordActivity('completed_task');
+    }
 }

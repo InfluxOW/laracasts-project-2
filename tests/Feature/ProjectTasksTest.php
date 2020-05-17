@@ -29,7 +29,7 @@ class ProjectTasksTest extends TestCase
         $data = ['body' => 'updated test task', 'completed' => true];
 
         $this->actingAs($project->owner)
-            ->patch(route('projects.tasks.update', ['project' => $project, 'task' => $project->tasks->first()]), $data);
+            ->patch(route('projects.tasks.update', [$project, $project->tasks->first()]), $data);
         $this->assertDatabaseHas('tasks', $data);
     }
 
@@ -54,7 +54,7 @@ class ProjectTasksTest extends TestCase
         $project = ProjectFactory::withTasks(1)->create();
         $data = ['body' => 'test body for the task', 'completed' => true];
 
-        $this->patch(route('projects.tasks.update', ['project' => $project, 'task' => $project->tasks->first()]), $data)
+        $this->patch(route('projects.tasks.update', [$project, $project->tasks->first()]), $data)
             ->assertForbidden();
         $this->assertDatabaseMissing('tasks', $data);
     }

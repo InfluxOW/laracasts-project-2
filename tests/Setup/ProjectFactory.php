@@ -24,9 +24,8 @@ class ProjectFactory
             'owner_id' => factory(User::class)
         ]);
 
-        factory(Task::class, $this->tasksCount)->create([
-            'project_id' => $project->id
-        ]);
+        $tasks = factory(Task::class, $this->tasksCount)->make();
+        $project->tasks()->saveMany($tasks);
 
         return $project;
     }

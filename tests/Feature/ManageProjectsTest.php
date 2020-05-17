@@ -22,6 +22,7 @@ class ManageProjectsTest extends TestCase
 
         $this->get(route('projects.index'))->assertRedirect('login');
         $this->get(route('projects.show', $project))->assertRedirect('login');
+        $this->get(route('projects.edit', $project))->assertRedirect('login');
         $this->get(route('projects.create'))->assertRedirect('login');
         $this->post(route('projects.store'), $project->toArray())->assertRedirect('login');
     }
@@ -50,24 +51,37 @@ class ManageProjectsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_update_a_project()
+    public function a_user_can_update_a_project_details()
     {
         $project = ProjectFactory::create();
 
         $attributes = [
             'title' => $this->faker->sentence(4),
-            'description' => $this->faker->paragraph(1),
-            'notes' => $this->faker->sentence(4)
+            'description' => $this->faker->paragraph(1)
         ];
 
         $this->actingAs($project->owner)->patch(route('projects.update', $project), $attributes)
             ->assertRedirect(route('projects.show', $project));
         $this->assertDatabaseHas('projects', $attributes);
 
+        $this->get(route('projects.edit', $project))->assertOk();
+
         $this->get(route('projects.show', $project))
             ->assertSee($attributes['title'])
-            ->assertSee($attributes['description'])
-            ->assertSee($attributes['notes']);
+            ->assertSee($attributes['description']);
+    }
+
+    /** @test */
+    public function a_user_can_update_a_project_general_notes()
+    {
+        $project = ProjectFactory::create();
+
+        $attributes = [
+            'notes' => $this->faker->sentence(4)
+        ];
+
+        $this->actingAs($project->owner)->patch(route('projects.update', $project), $attributes);
+        $this->assertDatabaseHas('projects', $attributes);
     }
 
     /** @test */

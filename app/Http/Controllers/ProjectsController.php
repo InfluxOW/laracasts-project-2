@@ -45,7 +45,7 @@ class ProjectsController extends Controller
      */
     public function store(ProjectValidation $request)
     {
-        $project = $request->user()->projects()->create($request->all());
+        $project = $request->user()->projects()->create($request->validated());
 
         return redirect(route('projects.show', $project));
     }
@@ -69,7 +69,7 @@ class ProjectsController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -81,7 +81,7 @@ class ProjectsController extends Controller
      */
     public function update(ProjectValidation $request, Project $project)
     {
-        $project->update($request->all());
+        $project->update($request->validated());
 
         return redirect(route('projects.show', $project));
     }

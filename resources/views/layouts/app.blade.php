@@ -46,6 +46,7 @@
         </nav>
 
         <div class="mx-auto py-4 container">
+            <x-errors/>
             @yield('content')
         </div>
     </div>
