@@ -14,7 +14,12 @@ class TaskObserver
      */
     public function created(Task $task)
     {
-        $task->project->recordActivity('created_task');
+        $task->recordActivity('task_created');
+    }
+
+    public function updating(Task $task)
+    {
+        $task->oldAttributes = $task->getOriginal();
     }
 
     /**
@@ -36,7 +41,7 @@ class TaskObserver
      */
     public function deleted(Task $task)
     {
-        //
+        $task->recordActivity('task_deleted');
     }
 
     /**

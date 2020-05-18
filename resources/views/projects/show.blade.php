@@ -49,6 +49,7 @@
             </div>
             <div class="lg:w-1/4 px-3">
                 <x-card :project="$project"/>
+                <x-activity :project="$project"/>
             </div>
         </div>
     </main>

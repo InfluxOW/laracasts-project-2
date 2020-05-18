@@ -15,7 +15,12 @@ class ProjectObserver
      */
     public function created(Project $project)
     {
-        $project->recordActivity('created');
+        $project->recordActivity('project_created');
+    }
+
+    public function updating(Project $project)
+    {
+        $project->oldAttributes = $project->getOriginal();
     }
 
     /**
@@ -26,7 +31,7 @@ class ProjectObserver
      */
     public function updated(Project $project)
     {
-        $project->recordActivity('updated');
+        $project->recordActivity('project_updated');
     }
 
     /**

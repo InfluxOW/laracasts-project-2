@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\TriggersActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    use TriggersActivity;
+
     protected $fillable = ['title', 'description', 'notes'];
 
     public function owner()
@@ -22,16 +25,5 @@ class Project extends Model
     {
         $task = Task::make($data);
         return $this->tasks()->save($task);
-    }
-
-    public function activity()
-    {
-        return $this->hasMany(Activity::class);
-    }
-
-    public function recordActivity($description)
-    {
-        $activity = Activity::make(['description' => $description]);
-        $this->activity()->save($activity);
     }
 }

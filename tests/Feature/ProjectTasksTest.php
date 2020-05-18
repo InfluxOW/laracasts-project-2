@@ -26,10 +26,36 @@ class ProjectTasksTest extends TestCase
     public function a_task_can_be_updated()
     {
         $project = ProjectFactory::withTasks(1)->create();
-        $data = ['body' => 'updated test task', 'completed' => true];
+        $data = ['body' => 'updated test task'];
 
         $this->actingAs($project->owner)
             ->patch(route('projects.tasks.update', [$project, $project->tasks->first()]), $data);
+        $this->assertDatabaseHas('tasks', $data);
+    }
+
+    /** @test */
+    public function a_task_can_be_completed()
+    {
+        $project = ProjectFactory::withTasks(1)->create();
+        $data = ['completed' => true, 'body' => 'test body'];
+
+        $this->actingAs($project->owner)
+            ->patch(route('projects.tasks.update', [$project, $project->tasks->first()]), $data);
+        $this->assertDatabaseHas('tasks', $data);
+    }
+
+    /** @test */
+    public function a_task_can_be_incompleted()
+    {
+        $project = ProjectFactory::withTasks(1)->create();
+        $data = ['completed' => true, 'body' => 'test body'];
+        $this->actingAs($project->owner)
+            ->patch(route('projects.tasks.update', [$project, $project->tasks->first()]), $data);
+
+        $data = ['completed' => false, 'body' => 'test body'];
+        $this->actingAs($project->owner)
+            ->patch(route('projects.tasks.update', [$project, $project->tasks->first()]), $data);
+
         $this->assertDatabaseHas('tasks', $data);
     }
 

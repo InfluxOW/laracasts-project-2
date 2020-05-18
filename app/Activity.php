@@ -6,5 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-    protected $fillable = ['description'];
+    protected $fillable = ['description', 'project_id', 'changes'];
+
+    protected $casts = [
+        'changes' => 'array',
+    ];
+
+    public function subject()
+    {
+        return $this->morphTo();
+    }
 }
