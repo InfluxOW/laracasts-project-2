@@ -41,4 +41,17 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Project', 'owner_id')->latest('updated_at');
     }
+
+    public function avaliableProjects()
+    {
+        return Project::where('owner_id', $this->id)
+            ->orWhereHas('members', function ($query) {
+                $query->where('user_id', $this->id);
+            });
+    }
+
+    public function getAvatar()
+    {
+        return $this->avatar->url ?? "https://api.adorable.io/avatars/200/abott@adorable{$this->name}";
+    }
 }

@@ -9,6 +9,12 @@
     box-shadow: 0 2px 7px 0 #b0eaff;
 }
 
+.button-sm-red {
+    @apply bg-red-300 text-white no-underline rounded-lg py-1 px-2 text-xs;
+    box-shadow: 0 2px 7px 0 #fed7d7;
+}
+
+
 .card {
     @apply bg-white mb-4 p-5 rounded-lg shadow-custom;
 }

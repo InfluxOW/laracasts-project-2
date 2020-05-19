@@ -2,11 +2,18 @@
 
 @section('content')
     <header class="flex items-center mb-4 py-4 mb-3">
-        <div class="flex justify-between w-full items-end">
-            <div class="text-gray-400 no-underline font-normal text-sm">
+        <div class="flex justify-between items-end w-full">
+            <p class="text-gray-400 no-underline font-normal text-sm">
                 <a href="{{ route('projects.index') }}">My Projects</a> / {{ $project->title }}
+            </p>
+
+            <div class="flex items-center">
+                @foreach ($project->members as $user)
+                    <img src="{{ $user->getAvatar() }}" alt="" class="rounded-full w-8 mr-2">
+                @endforeach
+                    <img src="{{ $project->owner->getAvatar() }}" alt="" class="rounded-full w-8">
+                <a href="{{ route('projects.edit', $project) }}" class="button ml-4">Edit Project</a>
             </div>
-            <a href="{{ route('projects.edit', $project) }}" class="button">Edit Project</a>
         </div>
     </header>
 

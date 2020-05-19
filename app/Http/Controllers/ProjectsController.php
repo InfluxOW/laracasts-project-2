@@ -20,7 +20,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects = Auth::user()->projects()->paginate(10);
+        $projects = Auth::user()->avaliableProjects()->paginate(10);
 
         return view('projects.index', compact('projects'));
     }
@@ -94,6 +94,8 @@ class ProjectsController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('projects.index');
     }
 }

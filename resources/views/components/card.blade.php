@@ -1,6 +1,10 @@
-<div class="card h-48">
+<div class="card h-48 flex flex-col">
     <div class="text-xl font-normal py-4 -ml-5 border-l-4 border-blue-custom pl-4 mb-3">
         <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
     </div>
-    <div class="text-gray-dark">{{ Str::limit($project->description, 200) }}</div>
+    <p class="text-gray-dark mb-4 flex-1">{{ Str::limit($project->description, 150) }}</p>
+
+    <footer class="text-right">
+        <a href="{{ route('projects.destroy', $project) }}" data-confirm="Are you sure?" data-method="delete" rel="nofollow" class="button-sm-red">{{ __('Delete') }}</a>
+    </footer>
 </div>

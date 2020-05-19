@@ -10,6 +10,7 @@ class Project extends Model
     use TriggersActivity;
 
     protected $fillable = ['title', 'description', 'notes'];
+    protected static $activityEvents = ['created', 'updated'];
 
     public function owner()
     {
@@ -25,5 +26,15 @@ class Project extends Model
     {
         $task = Task::make($data);
         return $this->tasks()->save($task);
+    }
+
+    public function invite(User $user)
+    {
+        return $this->members()->attach($user);
+    }
+
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'project_members')->withTimestamps();
     }
 }

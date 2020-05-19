@@ -16,5 +16,7 @@
         @empty
             <div>No projects yet!</div>
         @endforelse
+
+        {{ $projects->links() }}
     </main>
 @endsection

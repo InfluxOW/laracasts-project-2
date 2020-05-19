@@ -22,9 +22,11 @@ class ManageProjectsTest extends TestCase
 
         $this->get(route('projects.index'))->assertRedirect('login');
         $this->get(route('projects.show', $project))->assertRedirect('login');
+        $this->patch(route('projects.update', $project), ['title' => 'new title'])->assertRedirect('login');
         $this->get(route('projects.edit', $project))->assertRedirect('login');
         $this->get(route('projects.create'))->assertRedirect('login');
         $this->post(route('projects.store'), $project->toArray())->assertRedirect('login');
+        $this->delete(route('projects.destroy', $project))->assertRedirect('login');
     }
 
     /** @test */
@@ -48,6 +50,26 @@ class ManageProjectsTest extends TestCase
             ->assertSee($attributes['title'])
             ->assertSee($attributes['description'])
             ->assertSee($attributes['notes']);
+    }
+
+    /** @test */
+    public function a_user_can_see_all_projects_he_was_invited_to()
+    {
+        $user = $this->user();
+        $project = ProjectFactory::create();
+        $project->invite($user);
+
+        $this->actingAs($user)->get(route('projects.index'))->assertSee($project->title);
+    }
+
+    /** @test */
+    public function a_user_can_delete_a_project()
+    {
+        $project = ProjectFactory::create();
+
+        $this->actingAs($project->owner)->delete(route('projects.destroy', $project))
+                ->assertRedirect(route('projects.index'));
+        $this->assertDatabaseMissing('projects', $project->only('id'));
     }
 
     /** @test */
@@ -132,5 +154,15 @@ class ManageProjectsTest extends TestCase
         $project = ProjectFactory::create();
 
         $this->patch(route('projects.update', $project), ['notes' => 'test notes'])->assertForbidden();
+    }
+
+    /** @test */
+    public function an_authenticated_user_cannot_delete_the_projects_of_others()
+    {
+        $this->signIn();
+
+        $project = ProjectFactory::create();
+
+        $this->delete(route('projects.destroy', $project))->assertForbidden();
     }
 }
