@@ -1,1 +1,1 @@
-Task "{{ $activity->subject->body }}" was updated
+{{ $activity->user->name }} updated task "{{ $activity->subject->body }}"

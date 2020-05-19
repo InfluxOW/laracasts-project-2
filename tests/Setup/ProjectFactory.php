@@ -5,6 +5,7 @@ namespace Tests\Setup;
 use App\Project;
 use App\Task;
 use App\User;
+use Auth;
 
 class ProjectFactory
 {

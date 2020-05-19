@@ -11,6 +11,7 @@ class Task extends Model
 
     protected $fillable = ['body', 'completed'];
     protected $touches = ['project'];
+    protected static $activityEvents = ['created', 'deleted'];
 
     public function project()
     {
