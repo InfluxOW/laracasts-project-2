@@ -13,7 +13,7 @@
 
                 <div class="flex flex-col break-words bg-card border border-2 rounded shadow-md">
 
-                    <div class="font-semibold text-muted py-3 px-6 mb-0">
+                    <div class="font-semibold text-default text-xl text-center py-3 px-6 mt-1 border-b-2 mx-6">
                         {{ __('Reset Password') }}
                     </div>
 
@@ -25,7 +25,7 @@
                                 {{ __('E-Mail Address') }}:
                             </label>
 
-                            <input id="email" type="email" class="form-input w-full @error('email') border-red-500 @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <input id="email" type="email" class="form-input w-full bg-page @error('email') border-red-500 @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                             @error('email')
                                 <p class="text-red-500 text-xs italic mt-4">
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="flex flex-wrap">
-                            <button type="submit" class="w-full button focus:outline-none focus:shadow-outline">
+                            <button type="submit" class="button hover:bg-card hover:border-accent hover:text-accent border border-transparent  w-full">
                                 {{ __('Send Password Reset Link') }}
                             </button>
 

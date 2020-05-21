@@ -26,5 +26,3 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('projects.invitations', 'ProjectInvitationsController');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');

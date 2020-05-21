@@ -39,7 +39,7 @@
 
                     <div class="card">
                         {!! Form::open(['url' => route('projects.tasks.store', $project)]) !!}
-                            {!! Form::text('body', '', ['placeholder' => 'Add a new task...', 'class' => 'w-full bg-card']) !!}
+                            {!! Form::text('body', '', ['placeholder' => 'Add a new task...', 'class' => 'bg-card rounded p-2 text-xs w-full']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

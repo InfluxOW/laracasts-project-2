@@ -10,7 +10,7 @@
                 <li>
                     <a href="{{ $paginator->previousPageUrl() }}"
                        rel="prev"
-                       class="px-4 py-3 block text-accent border border-r-0 border-muted-light rounded-l hover:text-white hover:bg-accent focus:outline-none focus:shadow-outline"
+                       class="px-4 py-3 block text-accent border border-r-0 border-muted-light rounded-l hover:text-white hover:bg-accent "
                        aria-label="@lang('pagination.previous')"
                     >
                         &larr;
@@ -37,7 +37,7 @@
                         @else
                             <li>
                                 <a href="{{ $url }}"
-                                   class="px-4 py-3 block text-accent border border-r-0 border-muted-light hover:text-white hover:bg-accent focus:outline-none focus:shadow-outline"
+                                   class="px-4 py-3 block text-accent border border-r-0 border-muted-light hover:text-white hover:bg-accent "
                                    aria-label="@lang('pagination.goto_page', ['page' => $page])"
                                 >
                                     {{ $page }}
@@ -53,7 +53,7 @@
                 <li>
                     <a href="{{ $paginator->nextPageUrl() }}"
                        rel="next"
-                       class="px-4 py-3 block text-accent border border-muted-light rounded-r hover:text-white hover:bg-accent focus:outline-none focus:shadow-outline"
+                       class="px-4 py-3 block text-accent border border-muted-light rounded-r hover:text-white hover:bg-accent "
                        aria-label="@lang('pagination.next')"
                     >
                         &rarr;

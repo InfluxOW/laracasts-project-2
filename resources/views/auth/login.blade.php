@@ -6,7 +6,7 @@
             <div class="w-full max-w-sm">
                 <div class="flex flex-col break-words bg-card border border-2 rounded shadow-md">
 
-                    <div class="font-semibold text-muted py-3 px-6 mb-0">
+                    <div class="font-semibold text-default text-xl text-center py-3 px-6 mt-1 border-b-2 mx-6">
                         {{ __('Login') }}
                     </div>
 
@@ -18,7 +18,7 @@
                                 {{ __('E-Mail Address') }}:
                             </label>
 
-                            <input id="email" type="email" class="form-input w-full @error('email') border-red-500 @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <input id="email" type="email" class="bg-card form-input w-full @error('email') border-red-500 @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                             @error('email')
                                 <p class="text-red-500 text-xs italic mt-4">
@@ -32,7 +32,7 @@
                                 {{ __('Password') }}:
                             </label>
 
-                            <input id="password" type="password" class="form-input w-full @error('password') border-red-500 @enderror" name="password" required>
+                            <input id="password" type="password" class="bg-card form-input w-full @error('password') border-red-500 @enderror" name="password" required>
 
                             @error('password')
                                 <p class="text-red-500 text-xs italic mt-4">
@@ -41,33 +41,34 @@
                             @enderror
                         </div>
 
-                        <div class="flex mb-6">
+                        <div class="flex mb-4">
                             <label class="inline-flex items-center text-sm text-muted" for="remember">
-                                <input type="checkbox" name="remember" id="remember" class="form-checkbox" {{ old('remember') ? 'checked' : '' }}>
+                                <input type="checkbox" name="remember" id="remember" class="form-checkbox bg-card" {{ old('remember') ? 'checked' : '' }}>
                                 <span class="ml-2">{{ __('Remember Me') }}</span>
                             </label>
                         </div>
 
-                        <div class="flex flex-wrap items-center">
-                            <button type="submit" class="button focus:outline-none focus:shadow-outline">
-                                {{ __('Login') }}
-                            </button>
+                        <div class="flex items-center">
+                                <button type="submit" class="button hover:bg-card hover:border-accent hover:text-accent border border-transparent  w-full mr-2">
+                                    {{ __('Login') }}
+                                </button>
 
-                            @if (Route::has('password.request'))
-                                <a class="text-sm text-accent hover:bg-page whitespace-no-wrap no-underline ml-auto" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <p class="w-full text-xs text-center text-muted mt-8 -mb-4">
-                                    {{ __("Don't have an account?") }}
-                                    <a class="text-accent hover:bg-page no-underline" href="{{ route('register') }}">
-                                        {{ __('Register') }}
+                                @if (Route::has('password.request'))
+                                    <a class="text-sm text-accent no-underline whitespace-no-wrap border border-transparent hover:border-accent py-2 px-4 rounded-lg" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
                                     </a>
-                                </p>
-                            @endif
+                                @endif
                         </div>
+
+
+                        @if (Route::has('register'))
+                            <p class="w-full text-xs text-center text-muted mt-8 -mb-4">
+                                {{ __("Don't have an account?") }}
+                                <a class="text-accent no-underline" href="{{ route('register') }}">
+                                    {{ __('Register') }}
+                                </a>
+                            </p>
+                        @endif
                     </form>
 
                 </div>
