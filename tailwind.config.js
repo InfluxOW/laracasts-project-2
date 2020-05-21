@@ -3,7 +3,8 @@ module.exports = {
     './resources/views/**/*.blade.php',
     './resources/css/**/*.css',
     './resources/sass/**/*.scss',
-    './resources/js/**/*.js'
+    './resources/js/**/*.js',
+    './resources/js/**/*.vue'
   ],
   target: 'relaxed',
   prefix: '',
