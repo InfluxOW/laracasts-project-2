@@ -24,6 +24,7 @@
     "dependencies": {
         "@rails/ujs": "^6.0.3-1",
         "tailwindcss": "^1.4.6",
-        "turbolinks": "^5.2.0"
+        "turbolinks": "^5.2.0",
+        "vue-js-modal": "^2.0.0-rc.3"
     }
 }

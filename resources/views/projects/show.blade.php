@@ -29,7 +29,7 @@
                                 <div class="flex">
                                     <div class="w-full">
                                         {!! Form::text('body', $task->body,
-                                        ['placeholder' => 'Update a task...', 'class' => $task->completed ? 'text-gray-400' : '']) !!}
+                                        ['placeholder' => 'Update a task...', 'class' => $task->completed ? 'text-gray-400 line-through' : '']) !!}
                                     </div>
                                     {!! Form::checkbox('completed', true, $task->completed ?? false, ['onChange' => "this.form.submit()"]) !!}
                                 </div>
@@ -57,6 +57,9 @@
             <div class="lg:w-1/4 px-3">
                 <x-card :project="$project"/>
                 <x-activity :project="$project"/>
+                @can('invite', $project)
+                    <x-invitation-form :project="$project"/>
+                @endcan
             </div>
         </div>
     </main>

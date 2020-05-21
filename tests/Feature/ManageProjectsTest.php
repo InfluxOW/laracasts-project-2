@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Project;
 use App\User;
+use Auth;
 use Facades\Tests\Setup\ProjectFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -34,11 +35,9 @@ class ManageProjectsTest extends TestCase
     {
         $this->signIn();
 
-        $attributes = [
-            'title' => $this->faker->sentence(4),
-            'description' => $this->faker->paragraph(1),
-            'notes' => $this->faker->sentence(4)
-        ];
+        $attributes = factory(Project::class)->raw([
+            'owner_id' => Auth::user()->id
+            ]);
 
         $this->get(route('projects.create'))->assertOk();
 
@@ -164,5 +163,17 @@ class ManageProjectsTest extends TestCase
         $project = ProjectFactory::create();
 
         $this->delete(route('projects.destroy', $project))->assertForbidden();
+    }
+
+    /** @test */
+    public function an_invited_user_cannot_delete_the_project()
+    {
+        $project = ProjectFactory::create();
+        $user = $this->user();
+        $project->invite($user);
+
+        $this->actingAs($user)
+            ->delete(route('projects.destroy', $project))
+            ->assertForbidden();
     }
 }
