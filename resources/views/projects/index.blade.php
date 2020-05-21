@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <header class="flex items-center mb-4 py-4">
-        <div class="flex justify-between w-full items-end">
-            <div class="text-gray-400 no-underline font-normal text-sm">My Projects</div>
+    <header class="flex items-center py-2">
+        <div class="flex justify-between w-full items-center">
+            <div class="text-default no-underline font-normal text-sm">My Projects</div>
             <a href="{{ route('projects.create') }}" class="button">New Project</a>
         </div>
     </header>

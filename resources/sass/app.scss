@@ -1,20 +1,17 @@
-// Variables
-@import 'variables';
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.button {
-    @apply bg-blue-custom text-white no-underline rounded-lg py-2 px-4 text-sm;
-    box-shadow: 0 2px 7px 0 #b0eaff;
+@import 'themes/light';
+@import 'themes/dark';
+@import 'components/button';
+@import 'components/card';
+
+
+body {
+    @apply .text-default;
 }
 
-.button-sm-red {
-    @apply bg-red-300 text-white no-underline rounded-lg py-1 px-2 text-xs;
-    box-shadow: 0 2px 7px 0 #fed7d7;
-}
-
-
-.card {
-    @apply bg-white mb-4 p-5 rounded-lg shadow-custom;
+.section {
+    @apply .px-8;
 }

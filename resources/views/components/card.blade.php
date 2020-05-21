@@ -1,8 +1,8 @@
 <div class="card flex flex-col {{ $height ?? '' }}">
-    <div class="text-xl font-normal py-4 -ml-5 border-l-4 border-blue-custom pl-4 mb-3">
+    <div class="text-xl font-normal py-4 -ml-5 border-l-4 border-accent pl-4 mb-3">
         <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
     </div>
-    <p class="text-gray-dark mb-4 flex-1">{{ Str::limit($project->description, 150) }}</p>
+    <p class="text-muted mb-4 flex-1">{{ Str::limit($project->description, 150) }}</p>
 
     <footer class="text-right">
         @can('delete', $project)

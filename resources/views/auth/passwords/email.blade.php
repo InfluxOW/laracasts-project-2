@@ -11,9 +11,9 @@
                     </div>
                 @endif
 
-                <div class="flex flex-col break-words bg-white border border-2 rounded shadow-md">
+                <div class="flex flex-col break-words bg-card border border-2 rounded shadow-md">
 
-                    <div class="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
+                    <div class="font-semibold text-muted py-3 px-6 mb-0">
                         {{ __('Reset Password') }}
                     </div>
 
@@ -21,7 +21,7 @@
                         @csrf
 
                         <div class="flex flex-wrap mb-6">
-                            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
+                            <label for="email" class="block text-muted text-sm font-bold mb-2">
                                 {{ __('E-Mail Address') }}:
                             </label>
 
@@ -35,12 +35,12 @@
                         </div>
 
                         <div class="flex flex-wrap">
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            <button type="submit" class="w-full button focus:outline-none focus:shadow-outline">
                                 {{ __('Send Password Reset Link') }}
                             </button>
 
-                            <p class="w-full text-xs text-center text-gray-700 mt-8 -mb-4">
-                                <a class="text-blue-500 hover:text-blue-700 no-underline" href="{{ route('login') }}">
+                            <p class="w-full text-xs text-center text-muted mt-8 -mb-4">
+                                <a class="text-accent no-underline" href="{{ route('login') }}">
                                     {{ __('Back to login') }}
                                 </a>
                             </p>

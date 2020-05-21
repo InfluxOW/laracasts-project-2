@@ -15,31 +15,39 @@
 
     @stack('styles')
 </head>
-<body class="bg-gray-def h-screen antialiased leading-none">
+<body class="theme-light bg-page h-screen antialiased leading-none">
     <div id="app">
-        <nav class="bg-gray-200 shadow-lg mb-4 py-2">
+        <nav class="bg-header border-b-2 border-default mb-4 py-1">
             <div class="mx-auto px-6 md:px-0">
                 <div class="flex items-center justify-between ml-4">
                     <a href="{{ route('main') }}">
-                        <img src="{{ asset('images/birdboard.png') }}" width="320px">
+                        <img src="{{ asset('images/birdboard_theme-light.png') }}" width="320px" id="logo">
                     </a>
-                    <div class="flex-1 text-right mr-4">
-                        @guest
-                            <a class="no-underline hover:underline text-gray-300 text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            @if (Route::has('register'))
-                                <a class="no-underline hover:underline text-gray-300 text-sm p-3" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            @endif
-                        @else
-                            <span class="text-gray-300 text-sm pr-4">{{ Auth::user()->name }}</span>
 
-                            <a href="{{ route('logout') }}"
-                               class="no-underline hover:underline text-gray-300 text-sm p-3"
-                               onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                                {{ csrf_field() }}
-                            </form>
-                        @endguest
+                    <div>
+                        <div class="flex items-center ml-auto mr-4">
+                            @guest
+                                <a class="no-underline text-muted text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                @if (Route::has('register'))
+                                    <a class="no-underline text-muted text-sm p-3" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                @endif
+                            @else
+                                <theme-switcher></theme-switcher>
+                                <a
+                                        class="flex items-center text-default no-underline text-sm"
+                                        href="#" role="button"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        v-pre
+                                    >
+                                        <img width="35"
+                                             class="rounded-full mr-3"
+                                             src="{{ Auth::user()->getAvatar() }}">
+                                {{ Auth::user()->name }}
+                                </a>
+                            @endguest
+                        </div>
                     </div>
                 </div>
             </div>
