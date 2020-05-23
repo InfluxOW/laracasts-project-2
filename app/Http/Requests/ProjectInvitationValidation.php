@@ -6,6 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProjectInvitationValidation extends FormRequest
 {
+    protected $errorBag = 'project_invitation';
+
     /**
      * Determine if the user is authorized to make this request.
      *

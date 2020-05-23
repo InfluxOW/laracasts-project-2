@@ -41,7 +41,7 @@ trait TriggersActivity
         $activity = Activity::make([
             'description' => $description,
             'project_id' => class_basename($this) === 'Project' ? $this->id : $this->project_id,
-            'user_id' => class_basename($this) === 'Project' ? $this->owner_id : $this->project->owner_id,
+            'user_id' => Auth::user()->id ?? ($this->project ?? $this)->owner_id,
             'changes' => $this->activityChanges()
         ]);
         $this->activities()->save($activity);

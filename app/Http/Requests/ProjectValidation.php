@@ -7,6 +7,8 @@ use Illuminate\Validation\Rule;
 
 class ProjectValidation extends FormRequest
 {
+    protected $errorBag = 'project';
+
     /**
      * Determine if the user is authorized to make this request.
      *

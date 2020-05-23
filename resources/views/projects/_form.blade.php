@@ -2,8 +2,10 @@
     {!! Form::label('title', 'Title', ['class' => 'label text-sm mb-2 block']) !!}
     <div class="control">
         {!! Form::text('title', $project->title ?? '',
-        ['class' => 'bg-page border border-muted-light rounded p-2 text-xs w-full', 'required']) !!}
+        ['class' => "bg-page border border-muted-light rounded p-2 text-xs w-full", 'required']) !!}
     </div>
+
+    <x-error name='title' bag="project"/>
 </div>
 
 <div class="field mb-6">
@@ -12,4 +14,6 @@
         {!! Form::textarea('description', $project->description ?? '',
         ['class' => 'bg-page border border-muted-light rounded p-2 text-xs w-full', 'required']) !!}
     </div>
+
+    <x-error name='description' bag="project"/>
 </div>

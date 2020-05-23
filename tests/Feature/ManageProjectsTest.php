@@ -52,6 +52,23 @@ class ManageProjectsTest extends TestCase
     }
 
     /** @test */
+    public function tasks_can_be_included_as_a_part_of_a_new_project()
+    {
+        $this->signIn();
+
+        $attributes = factory(Project::class)->raw([
+            'owner_id' => Auth::user()->id
+            ]);
+        $attributes['tasks'] = [
+            ['body' => 'Task 1'],
+            ['body' => 'Task 2']
+        ];
+
+        $this->post(route('projects.store'), $attributes);
+        $this->assertCount(2, Project::first()->tasks);
+    }
+
+    /** @test */
     public function a_user_can_see_all_projects_he_was_invited_to()
     {
         $user = $this->user();
@@ -112,7 +129,7 @@ class ManageProjectsTest extends TestCase
 
         $attributes = factory('App\Project')->raw(['title' => '']);
 
-        $this->post(route('projects.store'), $attributes)->assertSessionHasErrors('title');
+        $this->post(route('projects.store'), $attributes)->assertSessionHasErrors('title', null, 'project');
     }
 
     /** @test */
@@ -122,7 +139,7 @@ class ManageProjectsTest extends TestCase
 
         $attributes = factory('App\Project')->raw(['description' => '']);
 
-        $this->post(route('projects.store'), $attributes)->assertSessionHasErrors('description');
+        $this->post(route('projects.store'), $attributes)->assertSessionHasErrors('description', null, 'project');
     }
 
     /** @test */

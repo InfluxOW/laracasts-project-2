@@ -6,7 +6,7 @@
 @import 'themes/dark';
 @import 'components/button';
 @import 'components/card';
-
+@import 'components/dropdown';
 
 body {
     @apply .text-default;
@@ -15,7 +15,3 @@ body {
 .section {
     @apply .px-8;
 }
-
-.vm--modal {
-    background-color: red;
-  }

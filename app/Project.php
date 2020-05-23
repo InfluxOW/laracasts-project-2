@@ -22,10 +22,14 @@ class Project extends Model
         return $this->hasMany('App\Task');
     }
 
-    public function addTask($data)
+    public function addTask($task)
     {
-        $task = Task::make($data);
-        return $this->tasks()->save($task);
+        return $this->tasks()->create($task);
+    }
+
+    public function addTasks($tasks)
+    {
+        return $this->tasks()->createMany($tasks);
     }
 
     public function invite(User $user)

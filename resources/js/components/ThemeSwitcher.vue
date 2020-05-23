@@ -26,7 +26,7 @@
         watch: {
             selectedTheme() {
                 document.body.className = document.body.className.replace(/theme-\w+/, this.selectedTheme);
-                document.getElementById("logo").src="../images/birdboard_" + this.selectedTheme + ".png";
+                document.getElementById("logo").src="/images/birdboard_" + this.selectedTheme + ".png";
                 localStorage.setItem('theme', this.selectedTheme);
             }
         }

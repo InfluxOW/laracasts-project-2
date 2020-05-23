@@ -93,6 +93,6 @@ class ProjectTasksTest extends TestCase
 
         $this->actingAs($project->owner)
             ->post(route('projects.tasks.store', $project), $attributes)
-            ->assertSessionHasErrors('body');
+            ->assertSessionHasErrors('body', null, 'project_task');
     }
 }

@@ -46,8 +46,17 @@ class ProjectsController extends Controller
     public function store(ProjectValidation $request)
     {
         $project = $request->user()->projects()->create($request->validated());
+        $url = route('projects.show', $project);
 
-        return redirect(route('projects.show', $project));
+        if ($request->has('tasks')) {
+            $project->addTasks($request->tasks);
+        }
+
+        if ($request->wantsJson()) {
+            return ['message' => $url];
+        }
+
+        return redirect($url);
     }
 
     /**

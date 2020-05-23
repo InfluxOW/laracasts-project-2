@@ -29,7 +29,7 @@
                                 <div class="flex">
                                     <div class="w-full">
                                         {!! Form::text('body', $task->body,
-                                        ['placeholder' => 'Update a task...', 'class' => $task->completed ? 'text-muted line-through bg-card' : 'bg-card']) !!}
+                                        ['placeholder' => 'Update a task...', 'class' => array_merge([$task->completed ? 'text-muted line-through' : ''], ['bg-card']) ]) !!}
                                     </div>
                                     {!! Form::checkbox('completed', true, $task->completed ?? false, ['onChange' => "this.form.submit()"]) !!}
                                 </div>
@@ -40,6 +40,7 @@
                     <div class="card">
                         {!! Form::open(['url' => route('projects.tasks.store', $project)]) !!}
                             {!! Form::text('body', '', ['placeholder' => 'Add a new task...', 'class' => 'bg-card rounded p-2 text-xs w-full']) !!}
+                            <x-error name='body' bag="project_task"/>
                         {!! Form::close() !!}
                     </div>
                 </div>

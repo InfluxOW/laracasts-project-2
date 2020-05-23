@@ -49,7 +49,7 @@ class InvitationTest extends TestCase
         $project = ProjectFactory::create();
         $this->actingAs($project->owner)
             ->post(route('projects.invitations.store', $project), ['email' => 'invalidemail@test.com'])
-            ->assertSessionHasErrors('email');
+            ->assertSessionHasErrors('email', null, 'project_invitation');
     }
 
     /** @test */

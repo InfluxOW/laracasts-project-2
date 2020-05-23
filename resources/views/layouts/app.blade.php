@@ -33,19 +33,22 @@
                                 @endif
                             @else
                                 <theme-switcher></theme-switcher>
-                                <a
-                                        class="flex items-center text-default no-underline text-sm"
-                                        href="#" role="button"
-                                        data-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        v-pre
-                                    >
-                                        <img width="35"
-                                             class="rounded-full mr-3"
-                                             src="{{ Auth::user()->getAvatar() }}">
-                                {{ Auth::user()->name }}
-                                </a>
+
+                                <dropdown align="right" width="100px">
+                                    <template v-slot:trigger>
+                                        <button
+                                            class="flex items-center text-default no-underline text-sm"
+                                            v-pre
+                                        >
+                                        <img src="{{ Auth::user()->getAvatar() }}" alt="" class="rounded-full w-8 mr-2">
+                                            {{ Auth::user()->name }}
+                                        </button>
+                                    </template>
+
+                                    {!! Form::open(['url' => route('logout'), 'id' => 'logout-form']) !!}
+                                        {!! Form::button('Logout', ['type' => 'submit', 'class' => 'dropdown-menu-link w-full text-center']) !!}
+                                    {!! Form::close() !!}
+                                </dropdown>
                             @endguest
                         </div>
                     </div>
@@ -60,6 +63,23 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(e) {
+          if (!e.target.matches('.dropbtn')) {
+          var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+              myDropdown.classList.remove('show');
+            }
+          }
+        }
+        </script>
     @stack('scripts')
 </body>
 </html>
