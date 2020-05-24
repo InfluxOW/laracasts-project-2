@@ -12,7 +12,7 @@
 
         <div class="field">
             <div class="control flex items-center">
-                {!! Form::button('Create', ['class' => 'button hover:bg-card hover:border-accent hover:text-accent border border-transparent  w-full mr-2 is-link', 'type' => 'submit']) !!}
+                {!! Form::button('Create', ['class' => 'button hover:bg-card hover:border-accent hover:text-accent border border-transparent  w-full mr-2', 'type' => 'submit']) !!}
                 <a href="{{ route('projects.index') }}" class="text-sm text-accent no-underline whitespace-no-wrap border border-transparent hover:border-accent py-2 px-4 rounded-lg">Cancel</a>
             </div>
         </div>

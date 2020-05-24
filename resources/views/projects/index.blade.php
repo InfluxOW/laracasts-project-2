@@ -5,7 +5,7 @@
         <div class="flex justify-between w-full items-center">
             <div class="text-default no-underline font-normal text-sm">My Projects</div>
             <a href="{{ route('projects.create') }}"
-            class="button is-link"
+            class="button"
             @click.prevent="$modal.show('new-project')"
             >New Project</a>
         </div>

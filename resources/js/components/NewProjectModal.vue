@@ -58,7 +58,7 @@
             <footer>
                 <div class="field">
                     <div class="control flex items-center justify-end">
-                        <button class="button mr-2 is-link" type="submit">Create</button>
+                        <button class="button mr-2" type="submit">Create</button>
                         <a href="#" @click="$modal.hide('new-project'); form.reset()" class="button-sm-no-bg" type="button">Cancel</a>
                     </div>
                 </div>

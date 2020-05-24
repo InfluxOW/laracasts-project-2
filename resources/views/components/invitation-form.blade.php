@@ -4,10 +4,9 @@
     </h3>
 
     {!! Form::open(['url' => route('projects.invitations.store', $project)]) !!}
-        <div class="mb-3">
-            {!! Form::text('email', '', ['class' => 'border border-muted-light bg-card rounded w-full py-2 px-3', 'placeholder' => 'Email address']) !!}
-        </div>
+        {!! Form::text('email', '', ['class' => 'border border-muted-light bg-card rounded w-full py-2 px-3 mb-3', 'placeholder' => 'Email address']) !!}
+        {!! Form::button('Invite', ['class' => 'button mt-2 w-full', 'type' => 'submit']) !!}
         <x-error name='email' bag="project_invitation"/>
-        {!! Form::button('Invite', ['class' => 'button is-link mr-2 mt-2', 'type' => 'submit']) !!}
+
     {!! Form::close() !!}
 </div>

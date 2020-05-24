@@ -12,7 +12,7 @@
 
         <div class="field">
             <div class="control flex items-center">
-                {!! Form::button('Update', ['class' => 'button w-full mr-2 is-link', 'type' => 'submit']) !!}
+                {!! Form::button('Update', ['class' => 'button w-full mr-2', 'type' => 'submit']) !!}
                 <a href="{{ route('projects.index') }}" class="button-sm-no-bg">Cancel</a>
             </div>
         </div>
