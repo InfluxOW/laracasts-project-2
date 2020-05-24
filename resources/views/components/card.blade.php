@@ -6,7 +6,7 @@
 
     <footer class="text-right">
         @can('delete', $project)
-            <a href="{{ route('projects.destroy', $project) }}" data-confirm="Are you sure?" data-method="delete" rel="nofollow" class="button-sm-red hover:bg-card hover:border-red-300 hover:text-red-300 border border-transparent">{{ __('Delete') }}</a>
+            <a href="{{ route('projects.destroy', $project) }}" data-confirm="Are you sure?" data-method="delete" rel="nofollow" class="button-sm-red">{{ __('Delete') }}</a>
         @endcan
     </footer>
 </div>

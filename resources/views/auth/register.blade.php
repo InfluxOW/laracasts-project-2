@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="flex flex-wrap">
-                            <button type="submit" class="button hover:bg-card hover:border-accent hover:text-accent border border-transparent  w-full">
+                            <button type="submit" class="button w-full">
                                 {{ __('Register') }}
                             </button>
 

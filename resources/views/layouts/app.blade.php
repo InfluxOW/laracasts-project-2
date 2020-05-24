@@ -26,14 +26,13 @@
 
                     <div>
                         <div class="flex items-center ml-auto mr-4">
+                            <theme-switcher></theme-switcher>
                             @guest
                                 <a class="no-underline text-muted text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 @if (Route::has('register'))
                                     <a class="no-underline text-muted text-sm p-3" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 @endif
                             @else
-                                <theme-switcher></theme-switcher>
-
                                 <dropdown align="right" width="100px">
                                     <template v-slot:trigger>
                                         <button
@@ -63,23 +62,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        /* When the user clicks on the button,
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(e) {
-          if (!e.target.matches('.dropbtn')) {
-          var myDropdown = document.getElementById("myDropdown");
-            if (myDropdown.classList.contains('show')) {
-              myDropdown.classList.remove('show');
-            }
-          }
-        }
-        </script>
     @stack('scripts')
 </body>
 </html>

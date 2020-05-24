@@ -49,12 +49,12 @@
                         </div>
 
                         <div class="flex items-center">
-                                <button type="submit" class="button hover:bg-card hover:border-accent hover:text-accent border border-transparent  w-full mr-2">
+                                <button type="submit" class="button w-full mr-2">
                                     {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="text-sm text-accent no-underline whitespace-no-wrap border border-transparent hover:border-accent py-2 px-4 rounded-lg" href="{{ route('password.request') }}">
+                                    <a class="border-sm-no-bg" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif

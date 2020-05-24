@@ -58,8 +58,8 @@
             <footer>
                 <div class="field">
                     <div class="control flex items-center justify-end">
-                        <button class="button hover:bg-card hover:border-accent hover:text-accent border border-transparent mr-2 is-link" type="submit">Create</button>
-                        <a href="#" @click="$modal.hide('new-project'); form.reset()" class="text-sm text-accent no-underline whitespace-no-wrap border border-transparent hover:border-accent py-2 px-4 rounded-lg" type="button">Cancel</a>
+                        <button class="button mr-2 is-link" type="submit">Create</button>
+                        <a href="#" @click="$modal.hide('new-project'); form.reset()" class="button-sm-no-bg" type="button">Cancel</a>
                     </div>
                 </div>
             </footer>
