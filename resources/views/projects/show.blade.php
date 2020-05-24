@@ -11,7 +11,7 @@
                 @foreach ($project->members as $user)
                     <img src="{{ $user->getAvatar() }}" alt="" class="rounded-full w-8 mr-2">
                 @endforeach
-                    <img src="{{ $project->owner->getAvatar() }}" alt="" class="rounded-full w-8">
+                <img src="{{ $project->owner->getAvatar() }}" alt="" class="rounded-full w-8 border-2 border-default">
                 <a href="{{ route('projects.edit', $project) }}" class="button ml-4">Edit Project</a>
             </div>
         </div>
@@ -63,5 +63,7 @@
                 @endcan
             </div>
         </div>
+
+        <edit-project-modal></edit-project-modal>
     </main>
 @endsection
