@@ -15,3 +15,19 @@ body {
 .section {
     @apply .px-8;
 }
+
+.fixed-header{
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.fixed-header tbody{
+    display:block;
+    width: 100%;
+    overflow: auto;
+    height: 200px;
+}
+
+.fixed-header thead tr {
+    display: block;
+}

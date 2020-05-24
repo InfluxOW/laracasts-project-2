@@ -52,7 +52,7 @@ class ProjectTasksTest extends TestCase
         $this->actingAs($project->owner)
             ->patch(route('projects.tasks.update', [$project, $project->tasks->first()]), $data);
 
-        $data = ['completed' => false, 'body' => 'test body'];
+        $data = ['body' => 'test body'];
         $this->actingAs($project->owner)
             ->patch(route('projects.tasks.update', [$project, $project->tasks->first()]), $data);
 

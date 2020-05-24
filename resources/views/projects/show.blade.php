@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <header class="flex items-center mb-4 py-4 mb-3">
+    <header class="flex items-center mb-4 py-2 mb-3">
         <div class="flex justify-between items-center w-full">
             <p class="text-muted no-underline font-normal text-sm text-left">
                 <a href="{{ route('projects.index') }}" class="text-default">My Projects</a> / {{ $project->title }}
@@ -29,9 +29,9 @@
                                 <div class="flex">
                                     <div class="w-full">
                                         {!! Form::text('body', $task->body,
-                                        ['placeholder' => 'Update a task...', 'class' => array_merge([$task->completed ? 'text-muted line-through' : ''], ['bg-card']) ]) !!}
+                                        ['placeholder' => 'Update a task...', 'class' => array_merge([$task->completed ? 'text-muted line-through' : ''], ['bg-card w-full']) ]) !!}
                                     </div>
-                                    {!! Form::checkbox('completed', true, $task->completed ?? false, ['onChange' => "this.form.submit()"]) !!}
+                                    {!! Form::checkbox('completed', true, $task->completed ?? true, ['onChange' => "this.form.submit()"]) !!}
                                 </div>
                             {!! Form::close() !!}
                         </div>

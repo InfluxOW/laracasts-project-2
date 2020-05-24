@@ -80,7 +80,13 @@ class ProjectTasksController extends Controller
 
         $task->update(['body' => $request->body]);
 
-        $request->completed ? $task->complete() : $task->incomplete();
+        if ($request->completed) {
+            if (!$task->completed) {
+                $task->complete();
+            }
+        } elseif ($task->completed) {
+            $task->incomplete();
+        }
 
         return redirect()->route('projects.show', $project);
     }

@@ -67,8 +67,7 @@ class TriggersActivityTest extends TestCase
                 route('projects.tasks.update', [$project, $project->tasks->first()]),
                 ['body' => 'test body', 'completed' => true]
             );
-
-        $this->assertCount(3, $project->activities);
+        $this->assertCount(4, $project->activities);
 
         $activity = $project->activities->last();
         $this->assertInstanceOf(Task::class, $activity->subject);
@@ -89,7 +88,7 @@ class TriggersActivityTest extends TestCase
             ['body' => 'test body', 'completed' => false]
         );
 
-        $this->assertCount(4, $project->activities);
+        $this->assertCount(5, $project->activities);
 
         $activity = $project->activities->last();
         $this->assertInstanceOf(Task::class, $activity->subject);

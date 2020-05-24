@@ -11,7 +11,6 @@ class Task extends Model
 
     protected $fillable = ['body', 'completed'];
     protected $touches = ['project'];
-    protected static $activityEvents = ['created', 'deleted'];
 
     public function project()
     {
@@ -21,12 +20,12 @@ class Task extends Model
     public function complete()
     {
         $this->update(['completed' => true]);
-        $this->recordActivity('task_completed');
+        // $this->recordActivity('task_completed');
     }
 
     public function incomplete()
     {
         $this->update(['completed' => false]);
-        $this->recordActivity('task_incompleted');
+        // $this->recordActivity('task_incompleted');
     }
 }
