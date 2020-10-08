@@ -1,6 +1,9 @@
 # Birdboard
 ![PHP CI](https://github.com/InfluxOW/laracasts-project-2/workflows/PHP%20CI/badge.svg)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/e6de972129e6d3688ebc/test_coverage)](https://codeclimate.com/github/InfluxOW/laracasts-project-2/test_coverage)\
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e6de972129e6d3688ebc/test_coverage)](https://codeclimate.com/github/InfluxOW/laracasts-project-2/test_coverage)
+
+Simble project board made by [Laracasts.com](https://laracasts.com/series/build-a-laravel-app-with-tdd) tutorials.
+
 [https://influx-birdboard.herokuapp.com/](https://influx-birdboard.herokuapp.com/)
 # Development Setup
 1. Run `make setup` to install dependencies, generate .env file, create SQLite database, apply migrations and etc.

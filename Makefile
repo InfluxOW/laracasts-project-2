@@ -7,9 +7,9 @@ install:
 run:
 	php artisan serve
 lint:
-	composer run-script phpcs -- --standard=PSR12 routes tests app
+	composer run-script phpcs
 lint-fix:
-	composer run-script phpcbf -- --standard=PSR12 routes tests app
+	composer run-script phpcbf
 setup: install
 	cp -n .env.example .env || true
 	php artisan key:generate
